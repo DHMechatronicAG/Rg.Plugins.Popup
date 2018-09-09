@@ -24,6 +24,7 @@ namespace Rg.Plugins.Popup.Mac.Impl
         }
 
         public bool IsInitialized => Popup.IsInitialized;
+        public bool IsSystemAnimationEnabled { get; }
 
         public Task AddAsync(PopupPage page)
         {
