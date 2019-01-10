@@ -11,7 +11,7 @@
     <AssemblyName>Rg.Plugins.Popup.UWP</AssemblyName>
     <DefaultLanguage>ru-RU</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -107,18 +107,15 @@
     <Compile Include="..\Rg.Plugins.Popup\Properties\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Impl\PopupPlatformWinPhone.cs" />
-    <Compile Include="Popup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderers\PopupPageRenderer.cs" />
     <EmbeddedResource Include="Properties\Rg.Plugins.Popup.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.7</Version>
+      <Version>6.1.5</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.1.0.697729</Version>
+      <Version>3.4.0.1008975</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +124,7 @@
       <Name>Rg.Plugins.Popup</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Rg.Plugins.Popup.WinShared\Rg.Plugins.Popup.WinShared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

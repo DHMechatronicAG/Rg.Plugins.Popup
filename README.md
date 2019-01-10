@@ -324,6 +324,10 @@ Or in xaml
 
 * [xam-forms-transparent-modal](https://github.com/gaborv/xam-forms-transparent-modal)
 
+## Created By: Kirill Lyubimov
+* LinkedIn: [Kirill Lyubimov](https://www.linkedin.com/in/kirill-lyubimov-06a68712b/)
+* Twitter: [@rotorgames_LK](https://twitter.com/rotorgames_LK)
+
 ## License
 
 The MIT License
