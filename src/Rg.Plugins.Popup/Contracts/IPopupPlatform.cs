@@ -12,8 +12,8 @@ namespace Rg.Plugins.Popup.Contracts
 
         bool IsSystemAnimationEnabled { get; }
 
-        Task AddAsync(PopupPage page);
+        Task AddAsync(IPopupPage page);
 
-        Task RemoveAsync(PopupPage page);
+        Task RemoveAsync(IPopupPage page);
     }
 }

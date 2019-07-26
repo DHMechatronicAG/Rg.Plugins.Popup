@@ -10,7 +10,7 @@ namespace Rg.Plugins.Popup.Services
 {
     internal class PopupNavigationImpl : IPopupNavigation
     {
-        private readonly List<PopupPage> _popupStack = new List<PopupPage>();
+        private readonly List<IPopupPage> _popupStack = new List<IPopupPage>();
 
         private IPopupPlatform PopupPlatform
         {
@@ -28,7 +28,7 @@ namespace Rg.Plugins.Popup.Services
             }
         }
 
-        public IReadOnlyList<PopupPage> PopupStack => _popupStack;
+        public IReadOnlyList<IPopupPage> PopupStack => _popupStack;
 
         public PopupNavigationImpl()
         {
@@ -41,7 +41,7 @@ namespace Rg.Plugins.Popup.Services
                 await PopAllAsync(false);
         }
 
-        public Task PushAsync(PopupPage page, bool animate = true)
+        public Task PushAsync(IPopupPage page, bool animate = true)
         {
             return InvokeThreadSafe(async () =>
             {
@@ -95,7 +95,7 @@ namespace Rg.Plugins.Popup.Services
             });
         }
 
-        public Task RemovePageAsync(PopupPage page, bool animate = true)
+        public Task RemovePageAsync(IPopupPage page, bool animate = true)
         {
             return InvokeThreadSafe(async () =>
             {
@@ -123,13 +123,13 @@ namespace Rg.Plugins.Popup.Services
 
         // Private
 
-        private async Task AddAsync(PopupPage page)
+        private async Task AddAsync(IPopupPage page)
         {
             _popupStack.Add(page);
             await PopupPlatform.AddAsync(page);
         }
 
-        private async Task RemoveAsync(PopupPage page)
+        private async Task RemoveAsync(IPopupPage page)
         {
             await PopupPlatform.RemoveAsync(page);
             _popupStack.Remove(page);
@@ -137,7 +137,7 @@ namespace Rg.Plugins.Popup.Services
 
         // Internal 
 
-        internal void RemovePopupFromStack(PopupPage page)
+        internal void RemovePopupFromStack(IPopupPage page)
         {
             if (_popupStack.Contains(page))
                 _popupStack.Remove(page);

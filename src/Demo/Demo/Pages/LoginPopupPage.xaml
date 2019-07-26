@@ -52,7 +52,7 @@
               HorizontalOptions="Center"
               x:Name="UsernameEntry"
               Style="{StaticResource EntryStyle}"
-              Placeholder="Username" />
+              Placeholder="Poes" />
             <Entry
               HorizontalOptions="Center"
               x:Name="PasswordEntry"
