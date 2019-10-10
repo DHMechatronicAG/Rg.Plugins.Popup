@@ -11,12 +11,12 @@ namespace Rg.Plugins.Popup.Pages
         /// <summary>
         /// Called internally my Rg.Plugins.Popup. DO NOT USE.
         /// </summary>
-        bool IsBeingAppeared { get; set; }
+        Task AppearingTransactionTask { get; set; }
 
         /// <summary>
         /// Called internally my Rg.Plugins.Popup. DO NOT USE.
         /// </summary>
-        bool IsBeingDismissed { get; set; }
+        Task DisappearingTransactionTask { get; set; }
 
         /// <summary>
         /// Called internally my Rg.Plugins.Popup. DO NOT USE.

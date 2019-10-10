@@ -23,9 +23,9 @@ namespace Rg.Plugins.Popup.Pages
 
         #region Internal Properties
 
-        public bool IsBeingAppeared { get; set; }
+        public Task AppearingTransactionTask { get; set; }
 
-        public bool IsBeingDismissed { get; set; }
+        public Task DisappearingTransactionTask { get; set; }
 
         #endregion
 
