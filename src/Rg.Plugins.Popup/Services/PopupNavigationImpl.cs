@@ -11,9 +11,8 @@ namespace Rg.Plugins.Popup.Services
 {
     internal class PopupNavigationImpl : IPopupNavigation
     {
-        readonly object _locker = new object();
-
-        readonly List<IPopupPage> _popupStack = new List<IPopupPage>();
+        private readonly List<IPopupPage> _popupStack = new List<IPopupPage>();
+		readonly object _locker = new object();
 
         public event EventHandler<PopupNavigationEventArgs> Pushing;
 
@@ -29,10 +28,10 @@ namespace Rg.Plugins.Popup.Services
             {
                 var popupPlatform = DependencyService.Get<IPopupPlatform>();
 
-                if (popupPlatform == null)
+                if(popupPlatform == null)
                     throw new InvalidOperationException("You MUST install Rg.Plugins.Popup to each project and call Rg.Plugins.Popup.Popup.Init(); prior to using it.\nSee more info: " + Config.InitializationDescriptionUrl);
 
-                if (!popupPlatform.IsInitialized)
+                if(!popupPlatform.IsInitialized)
                     throw new InvalidOperationException("You MUST call Rg.Plugins.Popup.Popup.Init(); prior to using it.\nSee more info: " + Config.InitializationDescriptionUrl);
 
                 return popupPlatform;
@@ -91,7 +90,7 @@ namespace Rg.Plugins.Popup.Services
 
         public Task PopAsync(bool animate = true)
         {
-            lock (_locker)
+            lock(_locker)
             {
                 animate = CanBeAnimated(animate);
 
@@ -104,7 +103,7 @@ namespace Rg.Plugins.Popup.Services
 
         public Task PopAllAsync(bool animate = true)
         {
-            lock (_locker)
+            lock(_locker)
             {
                 animate = CanBeAnimated(animate);
 
@@ -172,17 +171,19 @@ namespace Rg.Plugins.Popup.Services
 
         async Task AddAsync(IPopupPage page)
         {
+            _popupStack.Add(page);
             await PopupPlatform.AddAsync(page);
         }
 
         async Task RemoveAsync(IPopupPage page)
         {
             await PopupPlatform.RemoveAsync(page);
+            _popupStack.Remove(page);
         }
 
         // Internal 
 
-        internal void RemovePopupFromStack(PopupPage page)
+        internal void RemovePopupFromStack(IPopupPage page)
         {
             if (_popupStack.Contains(page))
                 _popupStack.Remove(page);
