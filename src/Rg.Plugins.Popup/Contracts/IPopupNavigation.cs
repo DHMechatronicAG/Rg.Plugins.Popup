@@ -8,14 +8,6 @@ namespace Rg.Plugins.Popup.Contracts
 {
     public interface IPopupNavigation
     {
-        event EventHandler<PopupNavigationEventArgs> Pushing;
-
-        event EventHandler<PopupNavigationEventArgs> Pushed;
-
-        event EventHandler<PopupNavigationEventArgs> Popping;
-
-        event EventHandler<PopupNavigationEventArgs> Popped;
-
         IReadOnlyList<IPopupPage> PopupStack { get; }
 
         event EventHandler<PopupNavigationEventArgs> Pushing;
