@@ -2,9 +2,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <Configurations>Debug;Release;ReleaseUWP</Configurations>
     </PropertyGroup>
     <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="4.2.0.910310" />
+      <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="readme.txt" />
