@@ -22,9 +22,9 @@ namespace Rg.Plugins.Popup.Tizen.Impl
             remove => Popup.OnInitialized -= value;
         }
 
-        public Task AddAsync(PopupPage page)
+        public Task AddAsync(IPopupPage page)
         {
-            var renderer = Platform.GetOrCreateRenderer(page);
+            var renderer = Platform.GetOrCreateRenderer(page.ContentPage);
             if (renderer == null)
                 return Task.CompletedTask;
             page.Parent = Application.Current.MainPage;
@@ -34,9 +34,9 @@ namespace Rg.Plugins.Popup.Tizen.Impl
             return Task.Delay(5);
         }
 
-        public Task RemoveAsync(PopupPage page)
+        public Task RemoveAsync(IPopupPage page)
         {
-            var renderer = Platform.GetRenderer(page);
+            var renderer = Platform.GetRenderer(page.ContentPage);
             if (renderer == null)
                 return Task.CompletedTask;
 

@@ -16,14 +16,14 @@ namespace Rg.Plugins.Popup.Contracts
 
         event EventHandler<PopupNavigationEventArgs> Popped;
 
-        IReadOnlyList<PopupPage> PopupStack { get; }
+        IReadOnlyList<IPopupPage> PopupStack { get; }
 
-        Task PushAsync(PopupPage page, bool animate = true);
+        Task PushAsync(IPopupPage page, bool animate = true);
 
         Task PopAsync(bool animate = true);
 
         Task PopAllAsync(bool animate = true);
 
-        Task RemovePageAsync(PopupPage page, bool animate = true);
+        Task RemovePageAsync(IPopupPage page, bool animate = true);
     }
 }

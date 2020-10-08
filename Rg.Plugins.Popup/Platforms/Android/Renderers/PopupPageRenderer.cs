@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Android.App;
 using Android.Content;
 using Android.Graphics;
@@ -12,6 +12,7 @@ using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Point = Xamarin.Forms.Point;
+using Rect = Android.Graphics.Rect;
 using View = Android.Views.View;
 
 [assembly: ExportRenderer(typeof(PopupPage), typeof(PopupPageRenderer))]

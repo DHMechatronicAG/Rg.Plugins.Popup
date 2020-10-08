@@ -7,7 +7,7 @@ namespace Rg.Plugins.Popup.Extensions
 {
     public static class NavigationExtension
     {
-        public static Task PushPopupAsync(this INavigation sender, PopupPage page, bool animate = true)
+        public static Task PushPopupAsync(this INavigation sender, IPopupPage page, bool animate = true)
         {
             return PopupNavigation.Instance.PushAsync(page, animate);
         }

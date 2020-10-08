@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ElmSharp;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Tizen.Renderers;
@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Tizen;
 using EColor = ElmSharp.Color;
 using EPopup = ElmSharp.Popup;
+using Rect = ElmSharp.Rect;
 
 [assembly: ExportRenderer(typeof(PopupPage), typeof(PopupPageRenderer))]
 namespace Rg.Plugins.Popup.Tizen.Renderers

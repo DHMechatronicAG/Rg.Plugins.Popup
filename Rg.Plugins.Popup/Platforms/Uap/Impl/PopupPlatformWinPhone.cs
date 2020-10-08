@@ -50,7 +50,7 @@ namespace Rg.Plugins.Popup.WinPhone.Impl
 
             if (lastPopupPage != null)
             {
-                var isPrevent = lastPopupPage.DisappearingTransactionTask != null || lastPopupPage.SendBackButtonPressed();
+                var isPrevent = lastPopupPage.DisappearingTransactionTask != null || lastPopupPage.ContentPage.SendBackButtonPressed();
 
                 if (!isPrevent)
                 {
@@ -60,12 +60,12 @@ namespace Rg.Plugins.Popup.WinPhone.Impl
             }
         }
 
-        public async Task AddAsync(PopupPage page)
+        public async Task AddAsync(IPopupPage page)
         {
             page.Parent = Application.Current.MainPage;
 
             var popup = new global::Windows.UI.Xaml.Controls.Primitives.Popup();
-            var renderer = (PopupPageRenderer)page.GetOrCreateRenderer();
+            var renderer = (PopupPageRenderer)page.ContentPage.GetOrCreateRenderer();
 
             renderer.Prepare(popup);
             popup.Child = renderer.ContainerElement;
@@ -75,16 +75,16 @@ namespace Rg.Plugins.Popup.WinPhone.Impl
             await Task.Delay(5);
         }
 
-        public async Task RemoveAsync(PopupPage page)
+        public async Task RemoveAsync(IPopupPage page)
         {
-            var renderer = (PopupPageRenderer)page.GetOrCreateRenderer();
+            var renderer = (PopupPageRenderer)page.ContentPage.GetOrCreateRenderer();
             var popup = renderer.Container;
 
             if (popup != null)
             {
                 renderer.Destroy();
 
-                Cleanup(page);
+                Cleanup(page.ContentPage);
                 page.Parent = null;
                 popup.Child = null;
                 popup.IsOpen = false;

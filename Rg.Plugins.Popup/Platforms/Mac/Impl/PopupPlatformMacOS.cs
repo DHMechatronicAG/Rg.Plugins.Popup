@@ -24,23 +24,23 @@ namespace Rg.Plugins.Popup.MacOS.Impl
 
         public bool IsSystemAnimationEnabled => true;
 
-        public Task AddAsync(PopupPage page)
+        public Task AddAsync(IPopupPage page)
         {
             page.Parent = Application.Current.MainPage;
 
-            page.DescendantRemoved += HandleChildRemoved;
+            page.ContentPage.DescendantRemoved += HandleChildRemoved;
 
-            var renderer = page.GetOrCreateRenderer();
+            var renderer = page.ContentPage.GetOrCreateRenderer();
 
             var forcedMainWindow = NSApplication.SharedApplication.MainWindow ?? Application.Current.MainPage.GetOrCreateRenderer().NativeView.Window;
             forcedMainWindow.ContentView.AddSubview(renderer.NativeView);
             return Task.CompletedTask;
         }
 
-        public Task RemoveAsync(PopupPage page)
+        public Task RemoveAsync(IPopupPage page)
         {
-            page.DescendantRemoved -= HandleChildRemoved;
-            page.DisposeModelAndChildrenRenderers();
+            page.ContentPage.DescendantRemoved -= HandleChildRemoved;
+            page.ContentPage.DisposeModelAndChildrenRenderers();
 
             return Task.CompletedTask;
         }

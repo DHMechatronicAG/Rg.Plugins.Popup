@@ -5,11 +5,11 @@ namespace Rg.Plugins.Popup.Events
 {
     public class PopupNavigationEventArgs : EventArgs
     {
-        public PopupPage Page { get; }
+        public IPopupPage Page { get; }
 
         public bool IsAnimated { get; }
 
-        public PopupNavigationEventArgs(PopupPage page, bool isAnimated)
+        public PopupNavigationEventArgs(IPopupPage page, bool isAnimated)
         {
             Page = page;
             IsAnimated = isAnimated;

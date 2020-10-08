@@ -13,7 +13,7 @@ namespace Rg.Plugins.Popup.Services
     {
         readonly object _locker = new object();
 
-        readonly List<PopupPage> _popupStack = new List<PopupPage>();
+        readonly List<IPopupPage> _popupStack = new List<IPopupPage>();
 
         public event EventHandler<PopupNavigationEventArgs> Pushing;
 
@@ -39,7 +39,7 @@ namespace Rg.Plugins.Popup.Services
             }
         }
 
-        public IReadOnlyList<PopupPage> PopupStack => _popupStack;
+        public IReadOnlyList<IPopupPage> PopupStack => _popupStack;
 
         public PopupNavigationImpl()
         {
@@ -52,7 +52,7 @@ namespace Rg.Plugins.Popup.Services
                 await PopAllAsync(false);
         }
 
-        public Task PushAsync(PopupPage page, bool animate = true)
+        public Task PushAsync(IPopupPage page, bool animate = true)
         {
             lock (_locker)
             {
@@ -117,7 +117,7 @@ namespace Rg.Plugins.Popup.Services
             }
         }
 
-        public Task RemovePageAsync(PopupPage page, bool animate = true)
+        public Task RemovePageAsync(IPopupPage page, bool animate = true)
         {
             lock (_locker)
             {
@@ -170,12 +170,12 @@ namespace Rg.Plugins.Popup.Services
 
         // Private
 
-        async Task AddAsync(PopupPage page)
+        async Task AddAsync(IPopupPage page)
         {
             await PopupPlatform.AddAsync(page);
         }
 
-        async Task RemoveAsync(PopupPage page)
+        async Task RemoveAsync(IPopupPage page)
         {
             await PopupPlatform.RemoveAsync(page);
         }

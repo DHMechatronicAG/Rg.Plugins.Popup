@@ -35,16 +35,16 @@ namespace Rg.Plugins.Popup.IOS.Impl
 
         public bool IsSystemAnimationEnabled => true;
 
-        public async Task AddAsync(PopupPage page)
+        public async Task AddAsync(IPopupPage page)
         {
             page.Parent = Application.Current.MainPage;
 
-            page.DescendantRemoved += HandleChildRemoved;
+            page.ContentPage.DescendantRemoved += HandleChildRemoved;
 
             if (UIApplication.SharedApplication.KeyWindow.WindowLevel == UIWindowLevel.Normal)
                 UIApplication.SharedApplication.KeyWindow.WindowLevel = -1;
 
-            var renderer = page.GetOrCreateRenderer();
+            var renderer = page.ContentPage.GetOrCreateRenderer();
 
             var window = new PopupWindow();
 
@@ -63,20 +63,20 @@ namespace Rg.Plugins.Popup.IOS.Impl
             await window.RootViewController.PresentViewControllerAsync(renderer.ViewController, false);
         }
 
-        public async Task RemoveAsync(PopupPage page)
+        public async Task RemoveAsync(IPopupPage page)
         {
-            var renderer = XFPlatform.GetRenderer(page);
+            var renderer = XFPlatform.GetRenderer(page.ContentPage);
             var viewController = renderer?.ViewController;
 
             await Task.Delay(50);
 
-            page.DescendantRemoved -= HandleChildRemoved;
+            page.ContentPage.DescendantRemoved -= HandleChildRemoved;
 
             if (renderer != null && viewController != null && !viewController.IsBeingDismissed)
             {
                 var window = viewController.View.Window;
                 await window.RootViewController.DismissViewControllerAsync(false);
-                DisposeModelAndChildrenRenderers(page);
+                DisposeModelAndChildrenRenderers(page.ContentPage);
                 window.RootViewController.Dispose();
                 window.RootViewController = null;
                 page.Parent = null;
