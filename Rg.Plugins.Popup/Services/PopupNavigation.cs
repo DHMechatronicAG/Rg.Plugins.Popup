@@ -37,7 +37,7 @@ namespace Rg.Plugins.Popup.Services
         }
 
         [Obsolete(DepractedMethodsText)]
-        public static IReadOnlyList<IPopupPage> PopupStack => Instance.PopupStack;
+        public static IReadOnlyList<PopupPage> PopupStack => Instance.PopupStack;
 
         [Obsolete(DepractedMethodsText)]
         public static Task PushAsync(PopupPage page, bool animate = true)

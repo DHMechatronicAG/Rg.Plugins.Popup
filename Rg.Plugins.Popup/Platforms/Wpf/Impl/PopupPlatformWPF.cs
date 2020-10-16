@@ -25,12 +25,12 @@ namespace Rg.Plugins.Popup.WPF.Impl
 
         public bool IsSystemAnimationEnabled => true;
 
-        public Task AddAsync(IPopupPage page)
+        public Task AddAsync(PopupPage page)
         {
             page.Parent = Application.Current.MainPage;
 
             var popup = new System.Windows.Controls.Primitives.Popup();
-            var renderer = (PopupPageRenderer)page.ContentPage.GetOrCreateRenderer();
+            var renderer = (PopupPageRenderer)page.GetOrCreateRenderer();
 
             renderer.Prepare(popup);
             popup.Child = renderer.Control;
@@ -40,9 +40,9 @@ namespace Rg.Plugins.Popup.WPF.Impl
             return Task.CompletedTask;
         }
 
-        public Task RemoveAsync(IPopupPage page)
+        public Task RemoveAsync(PopupPage page)
         {
-            var renderer = (PopupPageRenderer)page.ContentPage.GetOrCreateRenderer();
+            var renderer = (PopupPageRenderer)page.GetOrCreateRenderer();
             var popup = renderer.Container;
 
             if (popup != null)
@@ -50,7 +50,7 @@ namespace Rg.Plugins.Popup.WPF.Impl
                 renderer.Destroy();
                 renderer.Dispose();
 
-                Cleanup(page.ContentPage);
+                Cleanup(page);
                 page.Parent = null;
                 popup.Child = null;
                 popup.IsOpen = false;

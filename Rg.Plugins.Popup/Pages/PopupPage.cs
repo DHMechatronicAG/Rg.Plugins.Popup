@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Rg.Plugins.Popup.Pages
 {
-    public class PopupPage : ContentPage, IPopupPage
+    public class PopupPage : ContentPage
     {
         #region Private
 
@@ -23,9 +23,9 @@ namespace Rg.Plugins.Popup.Pages
 
         #region Internal Properties
 
-        public Task AppearingTransactionTask { get; set; }
+        internal Task AppearingTransactionTask { get; set; }
 
-        public Task DisappearingTransactionTask { get; set; }
+        internal Task DisappearingTransactionTask { get; set; }
 
         #endregion
 
@@ -200,24 +200,19 @@ namespace Rg.Plugins.Popup.Pages
 
         #region Animation Methods
 
-        public void PreparingAnimation()
+        internal void PreparingAnimation()
         {
             if (IsAnimationEnabled)
                 Animation?.Preparing(Content, this);
         }
 
-        public void DisposingAnimation()
+        internal void DisposingAnimation()
         {
             if (IsAnimationEnabled)
                 Animation?.Disposing(Content, this);
         }
 
-        public ContentPage ContentPage
-        {
-            get { return this; }
-        }
-
-        public async Task AppearingAnimation()
+        internal async Task AppearingAnimation()
         {
             OnAppearingAnimationBegin();
             await OnAppearingAnimationBeginAsync();
@@ -229,7 +224,7 @@ namespace Rg.Plugins.Popup.Pages
             await OnAppearingAnimationEndAsync();
         }
 
-        public async Task DisappearingAnimation()
+        internal async Task DisappearingAnimation()
         {
             OnDisappearingAnimationBegin();
             await OnDisappearingAnimationBeginAsync();

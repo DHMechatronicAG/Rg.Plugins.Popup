@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
@@ -33,22 +33,22 @@ namespace Rg.Plugins.Popup.Droid.Impl
 
         public bool IsSystemAnimationEnabled => GetIsSystemAnimationEnabled();
 
-        public Task AddAsync(IPopupPage page)
+        public Task AddAsync(PopupPage page)
         {
             var decoreView = DecoreView;
 
             page.Parent = XApplication.Current.MainPage;
 
-            var renderer = page.ContentPage.GetOrCreateRenderer();
+            var renderer = page.GetOrCreateRenderer();
 
             decoreView.AddView(renderer.View);
 
             return PostAsync(renderer.View);
         }
 
-        public Task RemoveAsync(IPopupPage page)
+        public Task RemoveAsync(PopupPage page)
         {
-            var renderer = page.ContentPage.GetOrCreateRenderer();
+            var renderer = page.GetOrCreateRenderer();
             if (renderer != null)
             {
                 var element = renderer.Element;
