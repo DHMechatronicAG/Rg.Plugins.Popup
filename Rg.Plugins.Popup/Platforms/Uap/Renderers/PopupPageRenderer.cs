@@ -22,7 +22,7 @@ namespace Rg.Plugins.Popup.Windows.Renderers
     {
         private Rect _keyboardBounds;
 
-        internal WinPopup Container { get; private set; }
+        internal WinPopup? Container { get; private set; }
 
         private PopupPage CurrentElement => (PopupPage)Element;
 
@@ -58,7 +58,7 @@ namespace Rg.Plugins.Popup.Windows.Renderers
             Window.Current.SizeChanged += OnSizeChanged;
             DisplayInformation.GetForCurrentView().OrientationChanged += OnOrientationChanged;
 
-            InputPane inputPane = InputPane.GetForCurrentView();
+            var inputPane = InputPane.GetForCurrentView();
             inputPane.Showing += OnKeyboardShowing;
             inputPane.Hiding += OnKeyboardHiding;
 
@@ -72,7 +72,7 @@ namespace Rg.Plugins.Popup.Windows.Renderers
             Window.Current.SizeChanged -= OnSizeChanged;
             DisplayInformation.GetForCurrentView().OrientationChanged -= OnOrientationChanged;
 
-            InputPane inputPane = InputPane.GetForCurrentView();
+            var inputPane = InputPane.GetForCurrentView();
             inputPane.Showing -= OnKeyboardShowing;
             inputPane.Hiding -= OnKeyboardHiding;
 
