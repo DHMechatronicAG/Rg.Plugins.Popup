@@ -55,10 +55,19 @@ namespace Rg.Plugins.Popup.IOS.Impl
 
             var renderer = page.GetOrCreateRenderer();
 
-            var window = new PopupWindow();
-
+            PopupWindow window;
             if (IsiOS13OrNewer)
+            {
+                var connectedScene = UIApplication.SharedApplication.ConnectedScenes.ToArray().FirstOrDefault(x => x.ActivationState == UISceneActivationState.ForegroundActive);
+                if (connectedScene != null && connectedScene is UIWindowScene windowScene)
+                    window = new PopupWindow(windowScene);
+                else
+                    window = new PopupWindow();
+
                 _windows.Add(window);
+            }
+            else
+                window = new PopupWindow();
 
             window.BackgroundColor = Color.Transparent.ToUIColor();
             window.RootViewController = new PopupPlatformRenderer(renderer);
@@ -105,7 +114,10 @@ namespace Rg.Plugins.Popup.IOS.Impl
                     window.Dispose();
                     window = null;
                 }
-                if (UIApplication.SharedApplication.KeyWindow.WindowLevel == -1 && _windows.Count == 0)
+
+                if(_windows.Count > 0)
+                    _windows.Last().WindowLevel = UIWindowLevel.Normal;
+                else if (UIApplication.SharedApplication.KeyWindow.WindowLevel == -1)
                     UIApplication.SharedApplication.KeyWindow.WindowLevel = UIWindowLevel.Normal;
             }
         }
